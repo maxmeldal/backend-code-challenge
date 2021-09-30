@@ -1,10 +1,16 @@
 # TwentyThree back-end code challenge
 CLI got lost in implementation of JPA and H2, so replacement web application was added instead
 
+
 Spring Boot webapplication, implements REST API. Written in Java using HTML for page display, H2 for In-Memory SQL Database, JPA for Datamapping and Thymeleaf for Web Data modelling
 
+
 Asset id is automatically generated UUID, HTML create and update page ensures valid url upon request
+
 Asset type ("Video"|"Photo") is set upon creation, cannot be altered after
+
+Application loads mock data from data.sql file
+
 
 ### Requirements
 download Postman from https://www.postman.com/downloads/
@@ -14,7 +20,6 @@ download Postman from https://www.postman.com/downloads/
 2. Run BackendCodeChallengeApplication/Main()
 3. http://localhost:8080/ - to change port go to main/resources/application.properties - change server.port=*
 
-Application loads mock data from data.sql file
 
 ## Using the REST API
 1. Run BackendCodeChallengeApplication/Main()
@@ -37,9 +42,11 @@ Use syntax below to findById(Get), create(Post), update(Put) and delete(Delete) 
     "url": "testAsset"
 }
 
+
 ## Running test
 1. Go to src/test/java/com.example.backendcodechallenge/repository/IAssetRepositoryTest
 2. Run class
+
 
 ## Accessing the H2-Console
 1. Run BackendCodeChallengeApplication/Main()
