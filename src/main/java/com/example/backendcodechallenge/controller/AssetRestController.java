@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -43,8 +46,18 @@ public class AssetRestController {
     //create mapping takes asset object
     @PostMapping("/assets")
     public ResponseEntity<String> create (@RequestBody Asset asset){
-        if (!asset.getType().equalsIgnoreCase("video") ||!asset.getType().equalsIgnoreCase("photo")){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{'msg': 'asset type must be either \"video\" or \"photo\"'}");
+        if (!asset.getType().equalsIgnoreCase("video") ){
+            if (!asset.getType().equalsIgnoreCase("photo")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{'msg': 'asset type must be either \"video\" or \"photo\"'}");
+            }
+        }
+
+        //check if url input can be converted to URL
+        try {
+            new URL(asset.getUrl()).toURI();
+        } catch (Exception e) {
+            //if can't be converted return bad_request status
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{'msg': 'asset url must be valid RFC-3987 url'}");
         }
 
         //save new asset
@@ -57,8 +70,17 @@ public class AssetRestController {
     //update mapping takes uuid and asset object
     @PutMapping("/assets/{uuid}")
     public ResponseEntity<String> update (@PathVariable UUID uuid, @RequestBody Asset assetNew){
-        if (!assetNew.getType().equalsIgnoreCase("video") ||!assetNew.getType().equalsIgnoreCase("photo")){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{'msg': 'asset type must be either \"video\" or \"photo\"'}");
+        //check if type has been altered
+        if (!assetNew.getType().equals(assetRepository.findById(uuid).get().getType())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{'msg': 'asset type cannot be changed'}");
+        }
+
+        //check if url input can be converted to URL
+        try {
+            new URL(assetNew.getUrl()).toURI();
+        } catch (Exception e) {
+            //if can't be converted return bad_request status
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{'msg': 'asset url must be valid RFC-3987 url'}");
         }
 
         //finds asset and saves in optional
