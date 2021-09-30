@@ -42,6 +42,8 @@ Use syntax below to findById(Get), create(Post), update(Put) and delete(Delete) 
     "url": "testAsset"
 }
 
+**Note: when updating asset, type cannot be changed**
+
 
 ## Running test
 1. Go to src/test/java/com.example.backendcodechallenge/repository/IAssetRepositoryTest
