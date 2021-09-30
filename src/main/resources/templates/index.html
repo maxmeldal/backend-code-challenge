@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Assets</title>
+</head>
+<body>
+<div>
+  <h1>Assets</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>UUID</th>
+        <th>Type</th>
+        <th>Title</th>
+        <th>Label</th>
+        <th>URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="asset : ${assets}">
+        <td th:text="${asset.uuid}"/>
+        <td th:text="${asset.type}"/>
+        <td th:text="${asset.title}"/>
+        <td th:text="${asset.label}"/>
+        <td>
+          <a th:text="${asset.url}" th:href="${asset.url}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/update/' + ${asset.uuid}}">Update</a>
+            <a th:href="@{'/delete/' + ${asset.uuid}}">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="create" role="button">Create asset</a>
+</div>
+</body>
+</html>

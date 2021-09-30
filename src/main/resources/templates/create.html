@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create asset</title>
+</head>
+<body>
+<h1>Create new asset</h1>
+<form action="/create" method="post" th:object="${asset}">
+  <label for="type">Select type</label>
+  <select id="type" name="type" required>
+    <option value="Video">Video</option>
+    <option value="Photo">Photo</option>
+  </select>
+  <input type="text" name="title" placeholder="Enter title" required>
+  <input type="text" name="label" placeholder="Enter label" required>
+  <input type="url" name="url" placeholder="https://example.com" required>
+  <input type="submit" value="create">
+</form>
+</body>
+</html>

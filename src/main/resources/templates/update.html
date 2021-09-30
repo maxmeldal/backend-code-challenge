@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update asset</title>
+</head>
+<body>
+<h1>Update asset</h1>
+<form action="/update" method="post" th:object="${asset}">
+    <input type="hidden" name="uuid" th:field="*{uuid}" th:value="${uuid}">
+    <input type="hidden" name="type" th:field="*{type}" th:value="${type}">
+    <input type="text" name="title" placeholder="Enter title" th:field="*{title}" th:value="${title}" required>
+    <input type="text" name="label" placeholder="Enter label" th:field="*{label}" th:value="${label}" required>
+    <input type="url" name="url" placeholder="Enter URL" th:field="*{url}" th:value="${url}" required>
+    <input type="submit" value="update">
+</form>
+</body>
+</html>
