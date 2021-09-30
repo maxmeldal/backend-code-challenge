@@ -1,5 +1,5 @@
 # TwentyThree back-end code challenge
-CLI got lost in implementation of REST API, so replacement web application was added instead
+CLI got lost in implementation of JPA and H2, so replacement web application was added instead
 
 Spring Boot webapplication, implements REST API. Written in Java using HTML for page display, H2 for In-Memory SQL Database, JPA for Datamapping and Thymeleaf for Web Data modelling
 
